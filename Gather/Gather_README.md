@@ -19,3 +19,8 @@ which contains data on the number of people in areas all around the greater City
 
 + Finally, we created the [Rainfall and Environmental Data Tables](https://github.com/brandries/Cape_Town_Watercrisis_OptimizePrime/blob/master/Gather/rain_manipulation.md),
 containing data on rainfall, temperature and windspeed at four locations across the greater Western Cape. 
+
+## Here we can include a picture of the ER diagram
+
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+
