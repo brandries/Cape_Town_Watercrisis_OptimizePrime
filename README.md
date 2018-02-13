@@ -7,7 +7,7 @@ Subsequently it is devided into four sections, corresponding to **Gather**, **An
 ## Gather
 Code within this section will predominantly be SQL
 
-All the SQL code written for this section, as well as it's explanation is avialable [here](https://github.com/brandries/Cape_Town_Watercrisis_OptimizePrime/blob/master/Gather/Gather_README.md)
+All the SQL code written for this section, as well as it's explanation is available [here](https://github.com/brandries/Cape_Town_Watercrisis_OptimizePrime/blob/master/Gather/Gather_README.md)
 
 ## Analyse
 Code within this section will predomimantly be Python
