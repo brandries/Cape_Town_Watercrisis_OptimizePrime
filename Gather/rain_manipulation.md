@@ -72,4 +72,5 @@ ALTER TABLE new_database.rain_stats
 
 ALTER TABLE new_database.rain_stats
 	ADD PRIMARY KEY (rain_key);
-	```
+	
+```
