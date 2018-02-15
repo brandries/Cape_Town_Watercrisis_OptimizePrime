@@ -23,6 +23,6 @@ containing data on rainfall, temperature and windspeed at four locations across 
 
 ## Here we include a picture of the ER diagram
 
-![alt text](https://github.com/brandries/Cape_Town_Watercrisis_OptimizePrime/blob/master/Gather/FINAL_FINAL_FINAL_ERD.jpg "
+![alt text](https://github.com/brandries/Cape_Town_Watercrisis_OptimizePrime/blob/master/Gather/FINAL_FINAL_FINAL_FINAL_ERD.jpg "
 ER Diagram")
 
