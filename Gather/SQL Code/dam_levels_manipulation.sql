@@ -200,6 +200,7 @@ ORDER BY t_date;
 DROP TABLE new_database.new_t_date;
 
 ALTER TABLE new_database.t_date  ADD CONSTRAINT unique_t_date_key UNIQUE(date_key);
+ALTER TABLE new_database.t_date ADD PRIMARY KEY (date_key);
 
 SELECT * FROM new_database.t_date;  
     

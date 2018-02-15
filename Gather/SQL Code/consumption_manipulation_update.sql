@@ -102,7 +102,6 @@ ON TD.year_key = TY.year_key;
 
 -- add indices and foreign keys
 
---CREATE INDEX idx_suburb_key ON new_database.water_statistics USING btree(suburb_key);
 
 CREATE INDEX idx_item_measured_key ON new_database.water_statistics USING btree(item_measured_key);
 
