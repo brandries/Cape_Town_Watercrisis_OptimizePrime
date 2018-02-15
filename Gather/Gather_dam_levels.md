@@ -824,7 +824,7 @@ DROP TABLE IF EXISTS new_database.year_temp;
 DROP TABLE IF EXISTS new_database.temp_year_key;
 ```
 
---CREATE a view - REDO THIS
+--CREATE a view 
 ```
 CREATE VIEW new_database.view_damlevels as 
 SELECT
