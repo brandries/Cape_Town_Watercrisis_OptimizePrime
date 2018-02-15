@@ -9,7 +9,8 @@ containing the dam levels, statistics for all the dams, and tables containing th
 
 + Next we created the [Suburbs](https://github.com/brandries/Cape_Town_Watercrisis_OptimizePrime/blob/master/Gather/Gather_new_suburbs.md)
 table. This table is a collection of all the suburbs sampled for the population, consumption and rain datasets, and will
-serve as links between these datasets.
+serve as links between these datasets. During the creation of this table, suburbs were manually edited, the complete edited 
+file can be found [here](https://github.com/brandries/Cape_Town_Watercrisis_OptimizePrime/blob/master/Gather/suburbs_organized_with_rain_population_consumption%20-%20final_incomplete_suburbs.tsv)
 
 + Following this, we created the [Consumption Tables](https://github.com/brandries/Cape_Town_Watercrisis_OptimizePrime/blob/master/Gather/consumption_manipulation.md), 
 which contains data on the consumption of residents, businesses, farms and other plots. 
