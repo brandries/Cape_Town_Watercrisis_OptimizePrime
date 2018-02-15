@@ -5,7 +5,8 @@ ALTER TABLE population ADD COLUMN total_id VARCHAR(20);
 ```
 
 -- Add unique UUids to the population table
-```ALTER TABLE population ADD COLUMN population_key UUid;
+```
+ALTER TABLE population ADD COLUMN population_key UUid;
 ```
 -- update the values of these columns
 ```UPDATE population SET total_id = 'total';
