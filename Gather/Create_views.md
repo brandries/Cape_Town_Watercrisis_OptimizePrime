@@ -214,6 +214,24 @@ ON ws.year_key = ty.year_key
 ORDER BY t_year 
 ```
 -- DAM LEVELS AND POPULATION
+```
+CREATE VIEW new_database.dam_population_view AS
+SELECT t.t_year, temp.average_height, temp.average_storage, temp.percent_dam, pt.total_population
+FROM ( SELECT ty.year_key, round(avg(ds.height_m)::numeric, 2) AS average_height, round(avg(ds.storage_ml)::numeric, 2) AS average_storage, 
+      ROUND(SUM(CAST (ds.storage_ml AS NUMERIC))/ SUM(CAST(dn.dam_capacity_ml AS NUMERIC))*100, 3) as percent_dam
+  	FROM new_database.dam_stats ds
+       LEFT JOIN new_database.dam_name as dn ON ds.dam_name_key = dn.dam_name_key
+       LEFT JOIN new_database.t_date nd ON ds.date_key = nd.date_key
+       LEFT JOIN new_database.t_year ty ON nd.year_key = ty.year_key
+   	   GROUP BY ty.year_key)  AS temp
+LEFT JOIN ( SELECT population_total.year_key, sum(population_total.count) AS total_population
+    FROM new_database.population_total
+        GROUP BY population_total.year_key) pt ON temp.year_key = pt.year_key
+        LEFT JOIN new_database.t_year t ON temp.year_key = t.year_key
+        ORDER BY t.t_year;
+
+```
+
 
 
 --SUPPLY AND DEMAND
