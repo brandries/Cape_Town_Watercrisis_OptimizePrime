@@ -2,7 +2,7 @@
 
 -- RAINFALL
 CREATE VIEW new_database.rain_view_per_area_yearly AS
-SELECT rn.region, tm.t_year, ROUND(AVG(rs."temp"), 3) AS temperature, ROUND(AVG(rs.rain), 3) AS rain, ROUND(AVG(rs.wind_speed), 3) AS wind_speed
+SELECT rn.region, tm.t_year, ROUND(AVG(rs."temp"), 3) AS temperature, ROUND(SUM(rs.rain), 3) AS rain, ROUND(AVG(rs.wind_speed), 3) AS wind_speed
 FROM new_database.rain_stats AS rs
 LEFT JOIN new_database.region_name AS rn
 ON rs.region_key = rn.region_key
@@ -11,11 +11,11 @@ ON rs.date_key = td.date_key
 LEFT JOIN new_database.t_month as tm
 ON td.month_key = tm.month_key
 GROUP BY  region, t_year
-ORDER BY region,  t_year
+ORDER BY region,  t_year;
 
 -- monthly rainfall
 CREATE VIEW new_database.rain_view_per_area_monthly AS
-SELECT  reg.region, Round(AVG(rain.rain), 3) as rain ,ROUND(AVG(rain.wind_speed), 3) AS wind_speed, ROUND(AVG(RAIN.TEMP), 3) as temp, month.t_month, t_year
+SELECT  reg.region, Round(SUM(rain.rain), 3) as rain ,ROUND(AVG(rain.wind_speed), 3) AS wind_speed, ROUND(AVG(RAIN.TEMP), 3) as temp, month.t_month, t_year
 FROM new_database.rain_stats as rain
 LEFT JOIN new_database.region_name AS reg
 ON reg.region_key = rain.region_key
@@ -165,7 +165,7 @@ LEFT JOIN new_database.t_year as ty
 ON p1.year_key = ty.year_key
 WHERE t_year = 2017) as p7
 ON sb.suburb_key = p7.suburb_key
-GROUP BY main_area
+GROUP BY main_area;
 
 -- SUPPLY - DAM LEVELS AND RAINFALL
 CREATE VIEW new_database.supply_view AS
@@ -184,7 +184,7 @@ ON rs.date_key = ds.date_key
 LEFT JOIN new_database.dam_name as dn 
 ON ds.dam_name_key = dn.dam_name_key
 GROUP BY  tm.month_key
-ORDER BY t_year, t_month
+ORDER BY t_year, t_month;
 
 
 -- DEMAND - CONSUMPTION AND POPULATION
@@ -208,10 +208,23 @@ ON ws.year_key = pop.year_key
 LEFT JOIN new_database.t_year as ty
 ON ws.year_key = ty.year_key
  
-ORDER BY t_year 
+ORDER BY t_year ;
 
 -- DAM LEVELS AND POPULATION
-
+CREATE VIEW new_database.dam_population_view AS
+SELECT t.t_year, temp.average_height, temp.average_storage, temp.percent_dam, pt.total_population
+FROM ( SELECT ty.year_key, round(avg(ds.height_m)::numeric, 2) AS average_height, round(avg(ds.storage_ml)::numeric, 2) AS average_storage, 
+      ROUND(SUM(CAST (ds.storage_ml AS NUMERIC))/ SUM(CAST(dn.dam_capacity_ml AS NUMERIC))*100, 3) as percent_dam
+  	FROM new_database.dam_stats ds
+       LEFT JOIN new_database.dam_name as dn ON ds.dam_name_key = dn.dam_name_key
+       LEFT JOIN new_database.t_date nd ON ds.date_key = nd.date_key
+       LEFT JOIN new_database.t_year ty ON nd.year_key = ty.year_key
+   	   GROUP BY ty.year_key)  AS temp
+LEFT JOIN ( SELECT population_total.year_key, sum(population_total.count) AS total_population
+    FROM new_database.population_total
+        GROUP BY population_total.year_key) pt ON temp.year_key = pt.year_key
+        LEFT JOIN new_database.t_year t ON temp.year_key = t.year_key
+        ORDER BY t.t_year;
 
 --SUPPLY AND DEMAND
 
@@ -265,4 +278,4 @@ ON dam.year_key = ws.year_key
 LEFT JOIN new_database.t_year as ty
 ON ws.year_key = ty.year_key
  
-ORDER BY t_year 
+ORDER BY t_year ;
