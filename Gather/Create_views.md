@@ -5,7 +5,7 @@
 -- RAINFALL
 ```
 CREATE VIEW new_database.rain_view_per_area_yearly AS
-SELECT rn.region, tm.t_year, ROUND(AVG(rs."temp"), 3) AS temperature, ROUND(AVG(rs.rain), 3) AS rain, ROUND(AVG(rs.wind_speed), 3) AS wind_speed
+SELECT rn.region, tm.t_year, ROUND(AVG(rs."temp"), 3) AS temperature, ROUND(SUM(rs.rain), 3) AS rain, ROUND(AVG(rs.wind_speed), 3) AS wind_speed
 FROM new_database.rain_stats AS rs
 LEFT JOIN new_database.region_name AS rn
 ON rs.region_key = rn.region_key```
@@ -18,7 +18,7 @@ ORDER BY region,  t_year
 ```
 -- monthly rainfall
 ```CREATE VIEW new_database.rain_view_per_area_monthly AS
-SELECT  reg.region, Round(AVG(rain.rain), 3) as rain ,ROUND(AVG(rain.wind_speed), 3) AS wind_speed, ROUND(AVG(RAIN.TEMP), 3) as temp, month.t_month, t_year
+SELECT  reg.region, Round(SUM(rain.rain), 3) as rain ,ROUND(AVG(rain.wind_speed), 3) AS wind_speed, ROUND(AVG(RAIN.TEMP), 3) as temp, month.t_month, t_year
 FROM new_database.rain_stats as rain
 LEFT JOIN new_database.region_name AS reg
 ON reg.region_key = rain.region_key
